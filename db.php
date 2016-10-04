@@ -25,6 +25,7 @@ class db{
         id_collection Int NOT NULL AUTO_INCREMENT ,
         nom           Varchar (25) NOT NULL ,
         description   Text ,
+        ancre_collection,        Varchar (25) NOT NULL,
         PRIMARY KEY (id_collection )
 		)ENGINE=InnoDB;");
 		
@@ -32,6 +33,7 @@ class db{
         id_jeu      Int NOT NULL AUTO_INCREMENT ,
         nom         Varchar (25) NOT NULL ,
         description Text NOT NULL ,
+        ancre_jeu,  Varchar (25) NOT NULL,
         PRIMARY KEY (id_jeu )
 		)ENGINE=InnoDB;");
 		
@@ -39,6 +41,7 @@ class db{
         id_caracteristique Int NOT NULL AUTO_INCREMENT,
         Nom                Varchar (25) NOT NULL ,
         description        Text ,
+        ancre_caracteristique,  Varchar (25) NOT NULL,
         PRIMARY KEY (id_caracteristique )
 		)ENGINE=InnoDB;");
 		
@@ -46,6 +49,7 @@ class db{
         id_faction  Int NOT NULL AUTO_INCREMENT,
         nom         Varchar (25) ,
         description Text NOT NULL ,
+        ancre_faction,        Varchar (25) NOT NULL,
         PRIMARY KEY (id_faction )
 		)ENGINE=InnoDB;");
 		
@@ -53,6 +57,7 @@ class db{
         id_type     Int NOT NULL AUTO_INCREMENT,
         nom         Varchar (25) NOT NULL ,
         description Text NOT NULL ,
+        ancre_type,        Varchar (25) NOT NULL,
         PRIMARY KEY (id_type )
 		)ENGINE=InnoDB;");
 		
@@ -77,6 +82,7 @@ class db{
         id_keyword  Int NOT NULL AUTO_INCREMENT,
         nom         Varchar (25) NOT NULL ,
         description Text ,
+        ancre_keyword,        Varchar (25) NOT NULL,
         PRIMARY KEY (id_keyword )
 		)ENGINE=InnoDB;");
 		

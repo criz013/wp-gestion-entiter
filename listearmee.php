@@ -60,7 +60,9 @@ class Liste_armee {
 			 <p>
 			 	<label>Titre du jeu:</label> <input id="titre_jeu" name="titre_jeu" type="text" /> </br>
 			 	<label>Description:</label></br> 
-			 	<textarea id="description_jeu" name="description_jeu"> </textarea>
+			 	<textarea id="description_jeu" name="description_jeu"> </textarea></br>
+			 	<label>Ancre:</label>
+			 	<input id="ancre_jeu" name="ancre_jeu" type="text" /></br>
 			  	<input type="submit" value="Ajouter"/>
 			 </p>
 		</form>
@@ -70,7 +72,9 @@ class Liste_armee {
 			 <p>
 			 	<label>Nom de la faction</label> <input id="titre_faction" name="titre_faction" type="text" /> </br>
 			 	<label>Description:</label></br> 
-			 	<textarea id="description_faction" name="description_faction"> </textarea>
+			 	<textarea id="description_faction" name="description_faction"> </textarea></br>
+			 	<label>Ancre:</label>
+			 	<input id="ancre_faction" name="ancre_faction"  type="text" /></br>
 			 	<input type="submit" value="Ajouter" />
 			 </p> 
 		</form>
@@ -80,7 +84,9 @@ class Liste_armee {
 			 <p>
 			 	<label>Nom de la collection:</label> <input id="titre_collection" name="titre_collection" type="text" /> </br>
 			 	<label>Description:</label></br> 
-			 	<textarea id="description_collection" name="description_collection"> </textarea>
+			 	<textarea id="description_collection" name="description_collection"> </textarea></br>
+			 	<label>Ancre:</label> 
+			 	<input id="ancre_collection" name="ancre_collection" type="text"/></br>
 			 	<input type="submit" value="Ajouter" />
 			 </p>	 
 		</form>
@@ -90,7 +96,9 @@ class Liste_armee {
 			<p>
 				<label>Titre:</label> <input id="titre_type" name="titre_type" type="text" /> </br>
 				<label>Description:</label></br> 
-				<textarea id="description_type" name="description_type"> </textarea>
+				<textarea id="description_type" name="description_type"> </textarea></br>
+			 	<label>Ancre:</label> 
+			 	<input id="ancre_type" name="ancre_type" type="text" /></br>
 				<input type="submit" value="Ajouter" />
 			</p> 
 		</form>
@@ -100,7 +108,9 @@ class Liste_armee {
 			 <p> 
 			 	<label>Nom:</label> <input id="titre_caracteristique" name="titre_caracteristique" type="text" /> </br>
 			 	<label>Description:</label></br> 
-			 	<textarea id="description_caracteristique" name="description_caracteristique"> </textarea>
+			 	<textarea id="description_caracteristique" name="description_caracteristique"> </textarea></br>
+			 	<label>Ancre:</label> 
+			 	<input id="ancre_caracteristique" name="ancre_caracteristique" type="text" /></br>
 			 	<input type="submit" value="Ajouter" />
 			 </p> 
 		</form>
@@ -110,7 +120,9 @@ class Liste_armee {
 			 <p>
 			 	<label>Nom:</label> <input id="titre_mot_clee" name="titre_mot_clee" type="text" /> </br>
 			 	<label>Description:</label></br> 
-			 	<textarea id="description_mot_clee" name="description_mot_clee"> </textarea>
+			 	<textarea id="description_mot_clee" name="description_mot_clee"> </textarea></br> 
+			 	<label>Ancre:</label> 
+			 	<input id="ancre_keyword" name="ancre_keyword" type="text" /></br>
 			 	<input type="submit" value="Ajouter" />
 			 </p> 
 		</form>
@@ -136,18 +148,20 @@ class Liste_armee {
 			<h2><?php echo $jeu->nom;}?></h2></br>
 			Nom: <input id="nom_entite" name="nom_entite" type="text" /></br>
 			
-			
+			<!-- Faction -->
 			<?php 
 			$req_faction="SELECT * FROM {$wpdb->prefix}faction";
 			$aff_faction = $wpdb->get_results($req_faction);?>
 			Faction: <select id="faction_entité" name="faction_entité"><?php foreach ($aff_faction as $faction){ ?><option value="<?php echo $faction->id_faction;?>"><?php echo $faction->nom;?></option><?php }?></select></br>
 			
+			<!-- Type -->
 			<?php $req_type="SELECT * FROM {$wpdb->prefix}type";
 			$aff_type = $wpdb->get_results($req_type);?>
 			Type:<select id="type_entité" name="type_entité">
 			<?php foreach ($aff_type as $type){?>
 			<option value="<?php echo $type->id_type;?>"><?php echo $type->nom;?></option><?php }?></select></br>
 			
+			<!-- Collection -->
 			<h3>Collection</h3>
 			<?php $req_collection="SELECT * FROM {$wpdb->prefix}collection";
 			$aff_collection = $wpdb->get_results($req_collection);?>
@@ -156,20 +170,26 @@ class Liste_armee {
 			<option value="<?php echo $collection->id_collection;?>" > <?php echo $collection->nom;?> </option><?php }?>
 			</select></br>
 			
+			<!-- Caractéristique -->
 			<h3>Caractéristique</h3>
 			<?php $req_caracteristique="SELECT * FROM {$wpdb->prefix}caracteristique"; 
 			$aff_caracteristique = $wpdb->get_results($req_caracteristique);
 				foreach ($aff_caracteristique as $caracteristique){?>
-			<label><?php echo $caracteristique->Nom;?></label> <input id="<?php echo $caracteristique->Nom;?>" name="<?php echo $caracteristique->Nom;?>" type="text" />
+			<label><?php echo $caracteristique->Nom;?></label> <input id="<?php echo $caracteristique->ancre_caracteristique;?>" name="<?php echo $caracteristique->ancre_caracteristique;?>" type="text" />
 			</br><?php 
 			}?>
 			
+			<!-- Keyword -->
 			<h3>Mot clées</h3>
 			<?php $req_keyword="SELECT * FROM {$wpdb->prefix}keyword";
 			$aff_keyword = $wpdb->get_results($req_keyword);
 			foreach ($aff_keyword as $keyword){?>
-			 <input type="checkbox" name="<?php echo $keyword->nom;?>" value="<?php echo $keyword->id_keyword;?>" 
-			 		id="<?php echo $keyword->nom;?>" /> <label ><?php echo $keyword->nom;?></label><?php }?><br />
+			 <input type="checkbox" name="<?php echo $keyword->ancre_keyword;?>" value="<?php echo $keyword->id_keyword;?>" 
+			 		id="<?php echo $keyword->ancre_keyword;?>" /> <label ><?php echo $keyword->nom;?></label><?php }?><br />
+			 <h3>Capacitées</h3>		
+			<textarea id="capacitee_piece" name="capacitee_piece"> </textarea></br>
+			<h3>Texte d'ambiance</h3>		
+			<textarea id="text-ambiance" name="text-ambiance"> </textarea>
 			</p>
 		<input type="submit" value="Ajouter l'entité"/>
 		</form>

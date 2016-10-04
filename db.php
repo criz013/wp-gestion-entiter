@@ -127,81 +127,87 @@ class db{
 	{
 		global $wpdb;
     	
-		if (isset($_POST['titre_jeu']) && isset($_POST['description_jeu']))
+		if (isset($_POST['titre_jeu']) && isset($_POST['description_jeu']) && isset($_POST['ancre_jeu']) )
 		{
-			if (!empty($_POST['titre_jeu']))
+			if (!empty($_POST['titre_jeu']) && !empty($_POST['ancre_jeu']))
 			{
 				if (empty(($_POST['description_jeu'])))
 					{
 						$_POST['description_jeu'] = '';
 					}
     				
-						$wpdb->insert("{$wpdb->prefix}jeu", array('nom' => $_POST['titre_jeu'], 'description'=>$_POST['description_jeu']));
+						$wpdb->insert("{$wpdb->prefix}jeu", array('nom' => $_POST['titre_jeu'], 'description'=>$_POST['description_jeu'],
+																	'ancre_jeu'=>'jeu-'.$_POST['ancre_jeu']));
 			}
 		}
 		
-		if (isset($_POST['titre_caracteristique']) && isset($_POST['description_caracteristique']))
+		if (isset($_POST['titre_caracteristique']) && isset($_POST['description_caracteristique']) && isset($_POST['ancre_caracteristique']))
 		{
-			if (!empty($_POST['titre_caracteristique']))
+			if (!empty($_POST['titre_caracteristique']) && !empty($_POST['ancre_caracteristique']))
 			{
 				if (empty(($_POST['description_caracteristique'])))
 				{
 					$_POST['description_caracteristique'] = '';
 				}
 		
-				$wpdb->insert("{$wpdb->prefix}caracteristique", array('nom' => $_POST['titre_caracteristique'], 'description'=>$_POST['description_caracteristique']));
+				$wpdb->insert("{$wpdb->prefix}caracteristique", array('nom' => $_POST['titre_caracteristique'], 'description'=>$_POST['description_caracteristique']
+																		,'ancre_caracteristique'=>'carac-'.$_POST['ancre_caracteristique']));
 			}
 		}
 		
-		if (isset($_POST['titre_type']) && isset($_POST['description_type']))
+		if (isset($_POST['titre_type']) && isset($_POST['description_type']) && isset($_POST['ancre_type']))
 		{
-			if (!empty($_POST['titre_type']))
+			if (!empty($_POST['titre_type']) && !empty($_POST['ancre_type']))
 			{
 				if (empty(($_POST['description_type'])))
 					{
 						$_POST['description_type'] = '';
 					}
     				
-						$wpdb->insert("{$wpdb->prefix}type", array('nom' => $_POST['titre_type'], 'description'=>$_POST['description_type']));
+						$wpdb->insert("{$wpdb->prefix}type", array('nom' => $_POST['titre_type'], 'description'=>$_POST['description_type'],
+																	'ancre_type'=>'type-'.$_POST['ancre_type']));
 			}
 		}
 		
-		if (isset($_POST['titre_collection']) && isset($_POST['description_collection']))
+		if (isset($_POST['titre_collection']) && isset($_POST['description_collection']) && isset($_POST['ancre_collection']))
 		{
-			if (!empty($_POST['titre_collection']))
+			if (!empty($_POST['titre_collection']) && !empty($_POST['ancre_collection']))
 			{
 				if (empty(($_POST['description_collection'])))
 					{
 						$_POST['description_collection'] = '';
 					}
     				
-						$wpdb->insert("{$wpdb->prefix}collection", array('nom' => $_POST['titre_collection'], 'description'=>$_POST['description_collection']));
+						$wpdb->insert("{$wpdb->prefix}collection", array('nom' => $_POST['titre_collection'], 'description'=>$_POST['description_collection'],
+																			'ancre_collection'=>'collec-'.$_POST['ancre_collection']));
 			}
 		}
 		
-		if (isset($_POST['titre_faction']) && isset($_POST['description_faction']))
+		if (isset($_POST['titre_faction']) && isset($_POST['description_faction']) && isset($_POST['ancre_faction']))
 		{
-			if (!empty($_POST['titre_faction']))
+			if (!empty($_POST['titre_faction']) && !empty($_POST['ancre_faction']))
 			{
 				if (empty(($_POST['description_faction'])))
 					{
 						$_POST['description_faction'] = '';
 					}
     				
-						$wpdb->insert("{$wpdb->prefix}faction", array('nom' => $_POST['titre_faction'], 'description'=>$_POST['description_faction']));
+						$wpdb->insert("{$wpdb->prefix}faction", array('nom' => $_POST['titre_faction'], 'description'=>$_POST['description_faction'],
+																		'ancre_faction'=>'fac-'.$_POST['ancre_faction']));
 			}
 		}
 		
-		if (isset($_POST['titre_mot_clee']) && isset($_POST['description_mot_clee']))
+		if (isset($_POST['titre_mot_clee']) && isset($_POST['description_mot_clee']) && isset($_POST['ancre_keyword']))
 		{
-			if (!empty($_POST['titre_mot_clee']))
+			if (!empty($_POST['titre_mot_clee']) && !empty($_POST['ancre_keyword']))
 			{
 				if (empty(($_POST['description_mot_clee'])))
 				{
 					$_POST['description_mot_clee'] = '';
 				}
 	
-				$wpdb->insert("{$wpdb->prefix}keyword", array('nom' => $_POST['titre_mot_clee'], 'description'=>$_POST['description_mot_clee']));
+				$wpdb->insert("{$wpdb->prefix}keyword", array('nom' => $_POST['titre_mot_clee'], 'description'=>$_POST['description_mot_clee'],
+																		'ancre_keyword'=>'key-'.$_POST['ancre_keyword']));
 			}
 		}
 	}
@@ -270,29 +276,28 @@ class db{
 	{
 		global $wpdb;
 		$id_jeu= $wpdb->get_results("SELECT id_jeu FROM {$wpdb->prefix}jeu");
-		$carac = $wpdb->get_results("SELECT id_caracteristique, Nom FROM {$wpdb->prefix}caracteristique");
-		$keyword = $wpdb->get_results("SELECT Nom FROM {$wpdb->prefix}keyword");
-		
+		$carac = $wpdb->get_results("SELECT id_caracteristique, ancre_caracteristique FROM {$wpdb->prefix}caracteristique");
+		$keyword = $wpdb->get_results("SELECT ancre_keyword FROM {$wpdb->prefix}keyword");
+		 
 		foreach ( $id_jeu as $fivesdraft )
 		{
 			$id = $fivesdraft->id_jeu;
 		}
 		$wpdb->insert("{$wpdb->prefix}piece",array('nom'=>$_POST['nom_entite'],'image'=>'','id_faction'=>$_POST['faction_entité'],
-													'id_type'=>$_POST['type_entité'],'id_jeu'=>$id,'id_collection'=>$_POST['collection_entité']));	
+													'id_type'=>$_POST['type_entité'],'id_jeu'=>$id,'id_collection'=>$_POST['collection_entité'],
+													'text'=>$_POST['capacitee_piece'],'text_ambiance'=>$_POST['text-ambiance']));	
 		$the_last = $wpdb->insert_id;
 		
 		foreach ($carac as $result_carac)
 		{
-				$wpdb->insert("{$wpdb->prefix}piececarac",array('valeur'=>$_POST[$result_carac->Nom],'id_piece'=>$the_last,
+				$wpdb->insert("{$wpdb->prefix}piececarac",array('valeur'=>$_POST[$result_carac->ancre_caracteristique],'id_piece'=>$the_last,
 																'id_caracteristique'=>$result_carac->id_caracteristique));
 		}
 		
 		foreach ($keyword as $result_key)
 		{
-			
 			$wpdb->insert("{$wpdb->prefix}piecekeyword",array('id_piece'=>$the_last,
-					'id_keyword'=>$_POST[$result_key->Nom]));
-		
+					'id_keyword'=>$_POST[$result_key->ancre_keyword]));
 		}
 	}
 }

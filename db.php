@@ -20,20 +20,19 @@ class db{
 		
 		global $wpdb;
 		
-		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}collection(
         id_collection Int NOT NULL AUTO_INCREMENT ,
         nom           Varchar (25) NOT NULL ,
         description   Text ,
-        ancre_collection,        Varchar (25) NOT NULL,
+        ancre_collection        Varchar (25) NOT NULL,
         PRIMARY KEY (id_collection )
 		)ENGINE=InnoDB;");
 		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}jeu(
         id_jeu      Int NOT NULL AUTO_INCREMENT ,
         nom         Varchar (25) NOT NULL ,
-        description Text NOT NULL ,
-        ancre_jeu,  Varchar (25) NOT NULL,
+        description Text ,
+        ancre_jeu  Varchar (25) NOT NULL,
         PRIMARY KEY (id_jeu )
 		)ENGINE=InnoDB;");
 		
@@ -41,33 +40,33 @@ class db{
         id_caracteristique Int NOT NULL AUTO_INCREMENT,
         Nom                Varchar (25) NOT NULL ,
         description        Text ,
-        ancre_caracteristique,  Varchar (25) NOT NULL,
+        ancre_caracteristique  Varchar (25) NOT NULL,
         PRIMARY KEY (id_caracteristique )
 		)ENGINE=InnoDB;");
 		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}faction(
         id_faction  Int NOT NULL AUTO_INCREMENT,
-        nom         Varchar (25) ,
-        description Text NOT NULL ,
-        ancre_faction,        Varchar (25) NOT NULL,
+        nom         Varchar (25) NOT NULL,
+        description Text  ,
+        ancre_faction        Varchar (25) NOT NULL,
         PRIMARY KEY (id_faction )
 		)ENGINE=InnoDB;");
 		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}type(
         id_type     Int NOT NULL AUTO_INCREMENT,
         nom         Varchar (25) NOT NULL ,
-        description Text NOT NULL ,
-        ancre_type,        Varchar (25) NOT NULL,
+        description Text ,
+        ancre_type        Varchar (25) NOT NULL,
         PRIMARY KEY (id_type )
 		)ENGINE=InnoDB;");
 		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}piece(
         id_piece      Int NOT NULL AUTO_INCREMENT,
         nom           Varchar (50) NOT NULL ,
-        text,         Text,
+        text         Text NOT NULL,
         text_ambiance Text,
         image         Text ,
-        id_faction    Int ,
+        id_faction    Int NOT NULL ,
         id_type       Int NOT NULL ,
         id_jeu        Int NOT NULL ,
         id_collection Int NOT NULL ,
@@ -82,7 +81,7 @@ class db{
         id_keyword  Int NOT NULL AUTO_INCREMENT,
         nom         Varchar (25) NOT NULL ,
         description Text ,
-        ancre_keyword,        Varchar (25) NOT NULL,
+        ancre_keyword        Varchar (25) NOT NULL,
         PRIMARY KEY (id_keyword )
 		)ENGINE=InnoDB;");
 		
@@ -98,7 +97,7 @@ class db{
 		//error_log($wpdb->lastquery);
 		
 		$wpdb->query("CREATE TABLE {$wpdb->prefix}pieceKeyword(
-        valeur     Int NOT NULL ,
+        valeur     Int ,
         id_piece   Int NOT NULL ,
         id_keyword Int NOT NULL ,
         PRIMARY KEY (id_piece ,id_keyword ),

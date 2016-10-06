@@ -212,7 +212,8 @@ class db{
 		}
 	}
 	
-	public function supprimer(){
+	public function supprimer()
+	{
 		
 		global $wpdb;
 		
@@ -270,7 +271,21 @@ class db{
 		}
 	}
 	
-}
+	}
+	
+	public function supprimer_entiter(){
+		global $wpdb;
+		
+		if(isset($_POST['supprimer_entiter'])){
+			if(!empty($_POST['supprimer_entiter'])){
+				$sup=(int)$_POST['supprimer_entiter'];
+				
+					$wpdb->delete("{$wpdb->prefix}piececarac", array('id_piece'=>$sup));
+					$wpdb->delete("{$wpdb->prefix}piecekeyword", array('id_piece'=>$sup));
+					$wpdb->delete("{$wpdb->prefix}piece", array('id_piece'=>$sup));
+			}
+		}
+	}
 	
 	public function ajoutPiece()
 	{

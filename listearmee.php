@@ -30,6 +30,7 @@ class Liste_armee {
 		add_action('wp_loaded', array('db', 'ajout'));
 		add_action('wp_loaded',array('db', 'supprimer'));
 		add_action('wp_loaded',array('db','ajoutPiece'));
+		add_action('wp_loaded',array('db','supprimer_entiter'));
 
 	}
 	
@@ -41,10 +42,10 @@ class Liste_armee {
 	public function add_admin_menu()
 	{
     	add_menu_page('Collection', 'Collection', 'manage_options', 'coll');
-    	add_submenu_page('coll', 'Visualiser', 'Visualiser', 'manage_options', 'coll', array($this, 'visualiser_html'));
-    	add_submenu_page('coll', 'Configuration', 'Configuration', 'manage_options', 'configurer', array($this, 'configuration_html'));
-        add_submenu_page('coll', 'Ajouter une pièce', 'Ajouter une pièce', 'manage_options', 'administration', array($this, 'ajout_html'));	
-        add_submenu_page('coll','Gestion entiter','Gestion entiter','manage_options','gerer', array($this,'gestion_entiter_html'));
+    		add_submenu_page('coll', 'Visualiser', 'Visualiser', 'manage_options', 'coll', array($this, 'visualiser_html'));
+    		add_submenu_page('coll', 'Configuration', 'Configuration', 'manage_options', 'configurer', array($this, 'configuration_html'));
+        	add_submenu_page('coll', 'Ajouter une pièce', 'Ajouter une pièce', 'manage_options', 'administration', array($this, 'ajout_html'));	
+        	add_submenu_page('coll','Gestion entiter','Gestion entiter','manage_options','gerer', array($this,'gestion_entiter_html'));
     }
      
 	public function configuration_html()
